@@ -1,0 +1,6 @@
+{
+    "require": {
+        "intasend/intasend-php": "*",
+        "matscode/paystack-php-sdk": "^2.0"
+    }
+}

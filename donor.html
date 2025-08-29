@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FoodLink - Donate Food</title>
+</head>
+<body>
+  <h1>🍲 Donate Surplus Food</h1>
+  <form action="php/donor.php" method="POST">
+    <label>Donor Name:</label><br>
+    <input type="text" name="donor_name" required><br><br>
+
+    <label>Food Item:</label><br>
+    <input type="text" name="food_item" required><br><br>
+
+    <label>Quantity:</label><br>
+    <input type="text" name="quantity" required><br><br>
+
+    <label>Location:</label><br>
+    <input type="text" name="location" required><br><br>
+
+    <label>Contact (Phone/Email):</label><br>
+    <input type="text" name="contact" required><br><br>
+
+    <button type="submit">Submit Donation</button>
+  </form>
+</body>
+</html>
