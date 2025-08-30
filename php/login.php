@@ -1,27 +1,38 @@
 <?php
 session_start();
-include 'db.php';
+include 'db.php'; // this connects to freesqldatabase
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $email = $conn->real_escape_string($_POST['email']);
-    $password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-    $stmt = $conn->prepare("SELECT id,password,role,name FROM users WHERE email=? LIMIT 1");
-    $stmt->bind_param('s',$email);
+    // Prepare statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
-    $res = $stmt->get_result();
-    if($res->num_rows === 1){
-        $row = $res->fetch_assoc();
-        if(password_verify($password,$row['password'])){
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['role'] = $row['role'];
-            $_SESSION['name'] = $row['name'];
-            header('Location: ../dashboard.html');
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $username, $hashed_password);
+        $stmt->fetch();
+
+        // For demo we are using plain text password (not hashed)
+        if ($password === $hashed_password) {
+            $_SESSION['user_id'] = $id;
+            $_SESSION['username'] = $username;
+
+            echo "✅ Login successful. Welcome " . htmlspecialchars($username);
+            // Redirect to dashboard (create dashboard.php later)
+            // header("Location: dashboard.php");
             exit;
+        } else {
+            echo "❌ Invalid password";
         }
+    } else {
+        echo "❌ No account found with that email.";
     }
-    echo 'Invalid credentials.';
-} else {
-    echo 'Invalid request method.';
+
+    $stmt->close();
 }
+$conn->close();
 ?>
