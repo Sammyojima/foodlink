@@ -1,0 +1,10 @@
+:root{--accent:#0a8a4f;--muted:#666;--bg:#f7f8fa;font-family:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#111}
+.container{max-width:900px;margin:24px auto;padding:0 16px}
+.hero{background:#fff;padding:40px 0;border-bottom:6px solid var(--accent);text-align:center}
+.hero h1{margin:0;font-size:40px;color:var(--accent)}.hero p{margin:8px 0 16px;color:var(--muted)}
+.btn{display:inline-block;padding:10px 16px;border-radius:6px;background:var(--accent);color:#fff;text-decoration:none}
+.btn.outline{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.form-card{background:#fff;padding:20px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+label{display:block;margin:12px 0 6px}input,select{width:100%;padding:10px;border-radius:6px;border:1px solid #ddd}
+.muted{color:var(--muted)}footer{margin:40px 0 80px;text-align:center;color:var(--muted)}

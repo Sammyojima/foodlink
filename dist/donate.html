@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Post Donation - FoodLink</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="container form-card">
+    <h2>Post a food donation</h2>
+    <form action="php/donate.php" method="POST">
+      <label>Food item</label>
+      <input name="food_item" required />
+      <label>Quantity (e.g., 10 boxes)</label>
+      <input name="quantity" required />
+      <label>Expiry date</label>
+      <input type="date" name="expiry_date" required />
+      <label>Pickup location</label>
+      <input name="location" required />
+      <button class="btn" type="submit">Post Donation</button>
+    </form>
+    <p><a href="dashboard.html">Back to dashboard</a></p>
+  </main>
+</body>
+</html>

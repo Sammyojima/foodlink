@@ -1,7 +1,6 @@
 {
-  "require": {
-    "intasend/intasend-php": "*",
-    "matscode/paystack-php-sdk": "^2.0",
-    "ext-mysqli": "*"
-  }
+    "require": {
+        "intasend/intasend-php": "*",
+        "matscode/paystack-php-sdk": "^2.0"
+    }
 }

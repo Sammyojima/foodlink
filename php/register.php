@@ -1,24 +1,23 @@
 <?php
-include 'db.php'; // DB connection
+// Simple registration handler
+include 'db.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $name = $conn->real_escape_string($_POST['name']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $role = $conn->real_escape_string($_POST['role']);
+    $location = $conn->real_escape_string($_POST['location']);
 
-    // For hackathon demo we’ll keep password in plain text (later, use password_hash)
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $password);
-
-    if ($stmt->execute()) {
-        echo "✅ Registration successful. You can now login.";
-        // Optionally redirect to login
-        // header("Location: login.html");
+    $stmt = $conn->prepare("INSERT INTO users (name,email,password,role,location) VALUES (?,?,?,?,?)");
+    $stmt->bind_param('sssss',$name,$email,$password,$role,$location);
+    if($stmt->execute()){
+        header('Location: ../login.html');
+        exit;
     } else {
-        echo "❌ Error: " . $stmt->error;
+        echo 'Error: ' . $conn->error;
     }
-
-    $stmt->close();
+} else {
+    echo 'Invalid request method.';
 }
-$conn->close();
 ?>
